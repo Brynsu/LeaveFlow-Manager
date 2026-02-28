@@ -1,4 +1,9 @@
 public abstract class LeaveType{
+    private String leaveCode;
+    private String leaveName;
+    private int maxDaysPerYear;
+    private int advancedNoticeDays;
+    private boolean isPaid;
 
     public String getLeaveCode(){
         return leaveCode;
