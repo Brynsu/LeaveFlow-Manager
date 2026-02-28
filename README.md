@@ -5,7 +5,7 @@ The system is designed to allow employees to submit leave requests and enable su
 
 This project applies core OOP concepts such as classes, objects, inheritance, encapsulation, and service-based design to create an organized and structured system. The goal is to simulate a real-world company leave management process in a simple and efficient way.
 
-Members:
+Memberss:
 Shakira Marie Docena
 Flint Harvey Geverola
 Christian Alegam
