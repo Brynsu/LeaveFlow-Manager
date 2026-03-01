@@ -2,18 +2,20 @@ public class Employee {
 
     // Private Fields [ ENCAPSULATION ]
 
-    private int id, vacationBal, sickBal;
+    private int id, password, vacationBal, sickBal, emergencyBal;
     private String name, department, email;
 
     // CONSTRUCTOR
 
-    public Employee(int id, String name, String department, String email, int vacationBal, int sickBal){
+    public Employee(int id, String name, String department, String email, int password, int vacationBal, int sickBal, int emergencyBal){
         this.id = id;
         this.name = name;
         this.department = department;
         this.email = email;
+        this.password = password;
         this.vacationBal = vacationBal;
         this.sickBal = sickBal;
+        this.emergencyBal = emergencyBal;
     }
 
     // GETTERS
@@ -34,12 +36,20 @@ public class Employee {
         return email;
     }
 
+    public int getPassword() {
+        return password;
+    }
+
     public int getVacationBal() {
         return vacationBal;
     }
 
-    public String getSickBal() {
+    public int getSickBal() {
         return sickBal;
+    }
+
+    public int getEmergencyBal() {
+        return emergencyBal;
     }
 
     // SETTERS
@@ -56,12 +66,20 @@ public class Employee {
         this.email = email;
     }
 
+    public void setPassword(int password){
+        this.password = password;
+    }
+
     public void setVacationBal(int vacationBal){
         this.vacationBal = vacationBal;
     }
 
-    public void set(int sickBal){
+    public void setSickBal(int sickBal){
         this.sickBal = sickBal;
+    }
+
+    public void setEmergencyBal(int emergencyBal){
+        this.emergencyBal = emergencyBal;
     }
 
     // METHOD TO VIEW BALANCE ( VACATION AND SICK BALANCE )
@@ -69,6 +87,7 @@ public class Employee {
     public void viewBalances(){
         System.out.println("Vacation Balance: " + vacationBal);
         System.out.println("Sick Balance: " + sickBal);
+        System.out.println("Emergency Balance: " + emergencyBal);
     }
 
 }
