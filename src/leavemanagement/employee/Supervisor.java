@@ -2,9 +2,9 @@ public class Supervisor extends Employee {
 
     // CONSTRUCTOR
 
-    public Supervisor(int id, String name, String department, String email, int vacationBal, int sickBal) {
+    public Supervisor(int id, String name, String department, String email, String password, int vacationBal, int sickBal) {
 
-        super(id, name, department, email, vacationBal, sickBal);
+        super(id, name, department, email, password, vacationBal, sickBal);
 
     }
 

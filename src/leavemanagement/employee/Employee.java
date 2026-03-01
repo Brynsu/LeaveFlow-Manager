@@ -2,12 +2,12 @@ public class Employee {
 
     // Private Fields [ ENCAPSULATION ]
 
-    private int id, password, vacationBal, sickBal, emergencyBal;
-    private String name, department, email;
+    private int id, vacationBal, sickBal, emergencyBal;
+    private String name, department, email, password;
 
     // CONSTRUCTOR
 
-    public Employee(int id, String name, String department, String email, int password, int vacationBal, int sickBal, int emergencyBal){
+    public Employee(int id, String name, String department, String email, String password, int vacationBal, int sickBal, int emergencyBal){
         this.id = id;
         this.name = name;
         this.department = department;
@@ -36,7 +36,7 @@ public class Employee {
         return email;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -66,7 +66,7 @@ public class Employee {
         this.email = email;
     }
 
-    public void setPassword(int password){
+    public void setPassword(String password){
         this.password = password;
     }
 

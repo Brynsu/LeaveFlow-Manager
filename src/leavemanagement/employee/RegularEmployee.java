@@ -2,11 +2,11 @@ public class RegularEmployee extends Employee {
 
     // CONSTRUCTOR [ CALLS Employee CONSTRUCTOR ]
 
-    public RegularEmployee(int id, String name, String department, String email, int password, int vacationBal, int sickBal, int emergencyBal){
+    public RegularEmployee(int id, String name, String department, String email, String password, int vacationBal, int sickBal, int emergencyBal){
         super(id, name, department, email, password, vacationBal, sickBal, emergencyBal);
     }
 
-    // CREATE A LEAVE REQUEST
+    // CREATE A LEAVE REQUEST - creates the necessary identifications needed for the leave request
 
     public LeaveRequest createLeaveRequest(int requestId, String type, String startDate, String endDate, String reason){
         LeaveRequest req = new LeaveRequest(
