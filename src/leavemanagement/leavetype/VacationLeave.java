@@ -1,9 +1,9 @@
+package leavemanagement.leavetype;
+
 public class VacationLeave extends LeaveType{
-    private String leaveCode = "VL";
-    private String leaveName = "Vacation Leave";
-    private int maxDaysPerYear = 15;
-    private int advancedNoticeDays = 7;
-    private boolean isPaid = true;
 
+    public VacationLeave(){
 
+        super("VL", "Vacation Leave", 15, 7, true);
+    }
 }
