@@ -1,3 +1,6 @@
+package leavemanagement.employee;
+import leavemanagement.request.LeaveRequest;
+
 public class RegularEmployee extends Employee {
 
     // CONSTRUCTOR [ CALLS Employee CONSTRUCTOR ]

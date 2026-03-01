@@ -1,4 +1,7 @@
+package leavemanagement.employee;
+
 public class Employee {
+
 
     // Private Fields [ ENCAPSULATION ]
 

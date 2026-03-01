@@ -1,3 +1,6 @@
+package leavemanagement.employee;
+import leavemanagement.request.LeaveRequest;
+
 public class HRAdmin extends Employee {
 
     // CONSTRUCTOR
@@ -26,7 +29,7 @@ public class HRAdmin extends Employee {
 
     public void finalApprove(LeaveRequest req) {
         req.setStatus("HR Approved");
-        System.out.println("Request " + req.getRequest() + " approved by HR.");
+        System.out.println("Request " + req.getRequestId() + " approved by HR.");
     }
 
     // VIEW REQUEST INFO
