@@ -1,5 +1,7 @@
 package leavemanagement.leavetype;
 
+
+//SICK LEAVE
 public class SickLeave extends LeaveType{
 
     public SickLeave(){

@@ -1,5 +1,6 @@
 package leavemanagement.leavetype;
 
+//VACA LEAVE
 public class VacationLeave extends LeaveType{
 
     public VacationLeave(){

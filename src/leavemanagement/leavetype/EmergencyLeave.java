@@ -1,5 +1,6 @@
 package leavemanagement.leavetype;
 
+//EMERGENCY LEAVE
 public class EmergencyLeave extends LeaveType{
 
     public EmergencyLeave(){

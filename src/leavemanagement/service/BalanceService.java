@@ -1,5 +1,7 @@
 package leavemanagement.service;
 import leavemanagement.employee.Employee;
+
+// mo handle sa leave balance deduction after approval
 public class BalanceService {
 
     public void deductBalance(Employee emp, String leaveType, int days) {
