@@ -1,5 +1,14 @@
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello WOrld");
+package leavemanagement;
+
+import java.util.*;
+
+public class Main{
+
+    public static void main(String[] args){
+
+        LeaveManagementSystem system = new LeaveManagementSystem();
+
+        system.startSystem();
+
     }
 }
