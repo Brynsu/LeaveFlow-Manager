@@ -21,7 +21,7 @@ public class LeaveManagementSystem {
             System.out.println("------------------------------------");
             System.out.println("\t\t\t   LOGIN\t\t");
 
-            System.out.print("Enter Employee ID: ");
+            System.out.print("Enter Employee ID (1 - Employee, 2 - Supervisor, 3 - HR Admin): ");
             int id = sc.nextInt();
             sc.nextLine();
 
