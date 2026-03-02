@@ -7,12 +7,11 @@ public class Employee {
 
     // CONSTRUCTOR
 
-    public Employee(int id, String name, String department, String email, String password, int vacationBal, int sickBal, int emergencyBal){
+    public Employee(int id, String name, String department, String email, int vacationBal, int sickBal, int emergencyBal){
         this.id = id;
         this.name = name;
         this.department = department;
         this.email = email;
-        this.password = password;
         this.vacationBal = vacationBal;
         this.sickBal = sickBal;
         this.emergencyBal = emergencyBal;
@@ -34,10 +33,6 @@ public class Employee {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public int getVacationBal() {
@@ -64,10 +59,6 @@ public class Employee {
 
     public void setEmail(String email){
         this.email = email;
-    }
-
-    public void setPassword(String password){
-        this.password = password;
     }
 
     public void setVacationBal(int vacationBal){

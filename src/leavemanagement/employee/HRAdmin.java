@@ -2,8 +2,8 @@ public class HRAdmin extends Employee {
 
     // CONSTRUCTOR
 
-    public HRAdmin(int id, String name, String department, String email, String password, int vacationBal, int sickBal, int emergencyBal) {
-        super(id, name, department, email, password, vacationBal, sickBal, emergencyBal);
+    public HRAdmin(int id, String name, String department, String email, int vacationBal, int sickBal, int emergencyBal) {
+        super(id, name, department, email, vacationBal, sickBal, emergencyBal);
     }
 
     // ADD EMPLOYEE
