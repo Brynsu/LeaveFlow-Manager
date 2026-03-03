@@ -1,13 +1,19 @@
 package leavemanagement.leavetype;
 
+// Base class for all leave types
 public abstract class LeaveType{
+
     private String leaveCode;
     private String leaveName;
     private int maxDaysPerYear;
     private int advancedNoticeDays;
     private boolean isPaid;
 
-    public LeaveType(String leaveCode, String leaveName, int maxDaysPerYear, int advancedNoticeDays, boolean isPaid){
+    public LeaveType(String leaveCode, String leaveName,
+                     int maxDaysPerYear,
+                     int advancedNoticeDays,
+                     boolean isPaid){
+
         this.leaveCode = leaveCode;
         this.leaveName = leaveName;
         this.maxDaysPerYear = maxDaysPerYear;
@@ -15,6 +21,7 @@ public abstract class LeaveType{
         this.isPaid = isPaid;
     }
 
+    //getters
     public String getLeaveCode(){
         return leaveCode;
     }
@@ -32,7 +39,6 @@ public abstract class LeaveType{
     }
 
     public boolean issPaid(){
-
         return isPaid;
     }
 }
