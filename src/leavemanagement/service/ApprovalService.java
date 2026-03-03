@@ -1,41 +1,57 @@
 package leavemanagement.service;
 
+import leavemanagement.Company;
+
+import leavemanagement.employee.Employee;
+
 import leavemanagement.request.LeaveRequest;
-import leavemanagement.request.ApprovalRecord;
 
 public class ApprovalService {
 
-    public ApprovalRecord approveRequest(int recordId, LeaveRequest request, int approverId, String comments) {
+    private LeaveService leaveService;
 
-        request.setStatus("Approved");
+    private Company company;
 
-        ApprovalRecord record = new ApprovalRecord(
-                recordId,
-                request.getRequestId(),
-                approverId,
-                "Approved",
-                comments
-        );
+    private BalanceService balanceService;
 
-        System.out.println("Leave Request " + request.getRequestId() + " has been APPROVED.");
+    public ApprovalService(LeaveService leaveService, Company company, BalanceService balanceService) {
 
-        return record;
+        this.leaveService = leaveService;
+        this.company = company;
+        this.balanceService = balanceService;
+
     }
 
-    public ApprovalRecord rejectRequest(int recordId, LeaveRequest request, int approverId, String comments) {
+    public boolean approve(int requestId, String approvedStatus) {
 
-        request.setStatus("Rejected");
+        LeaveRequest req = leaveService.getRequestById(requestId);
 
-        ApprovalRecord record = new ApprovalRecord(
-                recordId,
-                request.getRequestId(),
-                approverId,
-                "Rejected",
-                comments
-        );
+        if (req == null) return false;
 
-        System.out.println("Leave Request " + request.getRequestId() + " has been REJECTED.");
+        req.setStatus(approvedStatus);
 
-        return record;
+        Employee emp = company.findEmployeeById(req.getEmployeeId());
+
+        balanceService.deductBalance(emp, req.getLeaveType(), req.getDays());
+
+        System.out.println("Request approved and balance updated.");
+
+        return true;
+
     }
+
+    public boolean reject(int requestId, String rejectedStatus) {
+
+        LeaveRequest req = leaveService.getRequestById(requestId);
+
+        if (req == null) return false;
+
+        req.setStatus(rejectedStatus);
+
+        System.out.println("Request rejected.");
+
+        return true;
+
+    }
+
 }

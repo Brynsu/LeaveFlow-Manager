@@ -4,15 +4,13 @@ import java.time.LocalDate;
 
 public class ApprovalRecord {
 
-    // Private Fields [ENCAPSULATION]
     private int recordId;
     private int requestId;
     private int approverId;
     private String decision; // Approved / Rejected
     private String comments;
     private LocalDate dateApproved;
-
-    // Constructor
+    
     public ApprovalRecord(int recordId, int requestId, int approverId, String decision, String comments) {
         this.recordId = recordId;
         this.requestId = requestId;
@@ -22,7 +20,6 @@ public class ApprovalRecord {
         this.dateApproved = LocalDate.now(); // Sets the approval date automatically
     }
 
-    // Getters
     public int getRecordId() {
         return recordId;
     }
@@ -47,7 +44,6 @@ public class ApprovalRecord {
         return dateApproved;
     }
 
-    // Setters
     public void setDecision(String decision) {
         this.decision = decision;
     }
@@ -59,8 +55,7 @@ public class ApprovalRecord {
     public void setDateApproved(LocalDate dateApproved) {
         this.dateApproved = dateApproved;
     }
-
-    // Helper Method to View Approval Details
+    
     public void viewApproval() {
         System.out.println("Approval Record ID: " + recordId);
         System.out.println("Request ID: " + requestId);
