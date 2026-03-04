@@ -7,10 +7,10 @@ public class ApprovalRecord {
     private int recordId;
     private int requestId;
     private int approverId;
-    private String decision; // Approved / Rejected
+    private String decision;
     private String comments;
     private LocalDate dateApproved;
-    
+
     public ApprovalRecord(int recordId, int requestId, int approverId, String decision, String comments) {
         this.recordId = recordId;
         this.requestId = requestId;
@@ -55,7 +55,7 @@ public class ApprovalRecord {
     public void setDateApproved(LocalDate dateApproved) {
         this.dateApproved = dateApproved;
     }
-    
+
     public void viewApproval() {
         System.out.println("Approval Record ID: " + recordId);
         System.out.println("Request ID: " + requestId);
