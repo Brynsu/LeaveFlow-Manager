@@ -1,5 +1,6 @@
 package leavemanagement.leavetype;
 
+//changed from Abstract to Interface
 public interface LeaveType {
 
     String getLeaveCode();
