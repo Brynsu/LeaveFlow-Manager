@@ -2,6 +2,7 @@ package leavemanagement.service;
 
 import leavemanagement.employee.Employee;
 
+//Added validation to prevent negative leave balances
 public class BalanceService {
 
     public void deductBalance(Employee emp, String leaveType, int days) {
