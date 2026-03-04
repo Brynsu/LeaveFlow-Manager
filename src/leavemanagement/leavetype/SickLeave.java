@@ -9,6 +9,8 @@ public class SickLeave implements LeaveType {
     private int advancedNoticeDays = 0;
     private boolean isPaid = true;
 
+
+    //GETTERS
     public String getLeaveCode() {
         return leaveCode;
     }

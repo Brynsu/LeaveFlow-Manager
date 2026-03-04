@@ -9,6 +9,7 @@ public class EmergencyLeave implements LeaveType {
     private int advancedNoticeDays = 0;
     private boolean isPaid = false;
 
+    //GETTERS
     public String getLeaveCode() {
         return leaveCode;
     }

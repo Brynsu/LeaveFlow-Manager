@@ -1,6 +1,6 @@
 package leavemanagement.leavetype;
 
-// VACATION LEAVE
+// VACA LEAVE
 public class VacationLeave implements LeaveType {
 
     private String leaveCode = "VL";
@@ -9,6 +9,7 @@ public class VacationLeave implements LeaveType {
     private int advancedNoticeDays = 7;
     private boolean isPaid = true;
 
+    //GETTERS
     public String getLeaveCode() {
         return leaveCode;
     }
