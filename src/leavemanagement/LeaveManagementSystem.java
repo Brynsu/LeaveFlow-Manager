@@ -40,44 +40,48 @@ public class LeaveManagementSystem {
             int id = sc.nextInt();
             sc.nextLine();
 
-            System.out.print("Enter Employee Name: ");
-            String name = sc.nextLine();
-
-            System.out.print("Enter Department: ");
-            String department = sc.nextLine();
-
-            System.out.print("Enter Email: ");
-            String email = sc.nextLine();
-
             String idStr = String.valueOf(id);
             char firstDigit = idStr.charAt(0);
 
-            if (firstDigit == '1' && !department.equalsIgnoreCase("HR")) {
-                currentUser = company.getOrCreateEmployee(id, name, department, email, "EMPLOYEE");
+            if (firstDigit == '1') {
+                currentUser = company.getOrCreateEmployee(id, "", "", "", "EMPLOYEE");
+            } else if (firstDigit == '2') {
+                currentUser = company.getOrCreateEmployee(id, "", "", "", "SUPERVISOR");
+            } else if (firstDigit == '3') {
+                currentUser = company.getOrCreateEmployee(id, "", "", "", "HR");
+            } else {
+                currentUser = null;
+                System.out.println("\nInvalid ID.");
+                continue;
+            }
+
+            System.out.print("Enter Employee Name: ");
+            currentUser.setName(sc.nextLine());
+
+            System.out.print("Enter Department: ");
+            currentUser.setDepartment(sc.nextLine());
+
+            System.out.print("Enter Email: ");
+            currentUser.setEmail(sc.nextLine());
+
+            if (firstDigit == '1' && !currentUser.getDepartment().equalsIgnoreCase("HR")) {
                 System.out.println("\nLogin Successful as Employee!");
+                System.out.println("Welcome, " + currentUser.getName());
                 employeeMenu();
 
-            } else if (firstDigit == '2' && !department.equalsIgnoreCase("HR")) {
-                currentUser = company.getOrCreateEmployee(id, name, department, email, "SUPERVISOR");
+            } else if (firstDigit == '2' && !currentUser.getDepartment().equalsIgnoreCase("HR")) {
                 System.out.println("\nLogin Successful as Supervisor!");
+                System.out.println("Welcome, " + currentUser.getName());
                 supervisorMenu();
 
-            } else if (firstDigit == '3' && department.equalsIgnoreCase("HR")) {
-                currentUser = company.getOrCreateEmployee(id, name, department, email, "HR");
+            } else if (firstDigit == '3' && currentUser.getDepartment().equalsIgnoreCase("HR")) {
                 System.out.println("\nLogin Successful as HR Admin!");
+                System.out.println("Welcome, " + currentUser.getName());
                 hrAdminMenu();
 
             } else {
                 currentUser = null;
                 System.out.println("\nInvalid credentials based on company rules.");
-            }
-
-            System.out.println("\nDo you want to login again? (yes/no)");
-            String choice = sc.nextLine();
-
-            if (choice.equalsIgnoreCase("no")) {
-                systemRunning = false;
-                System.out.println("Exiting system...");
             }
         }
     }
