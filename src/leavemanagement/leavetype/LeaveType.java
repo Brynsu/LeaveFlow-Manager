@@ -1,44 +1,14 @@
 package leavemanagement.leavetype;
 
-// Base class for all leave types
-public abstract class LeaveType{
+public interface LeaveType {
 
-    private String leaveCode;
-    private String leaveName;
-    private int maxDaysPerYear;
-    private int advancedNoticeDays;
-    private boolean isPaid;
+    String getLeaveCode();
 
-    public LeaveType(String leaveCode, String leaveName,
-                     int maxDaysPerYear,
-                     int advancedNoticeDays,
-                     boolean isPaid){
+    String getLeaveName();
 
-        this.leaveCode = leaveCode;
-        this.leaveName = leaveName;
-        this.maxDaysPerYear = maxDaysPerYear;
-        this.advancedNoticeDays = advancedNoticeDays;
-        this.isPaid = isPaid;
-    }
+    int getMaxDaysPerYear();
 
-    //getters
-    public String getLeaveCode(){
-        return leaveCode;
-    }
+    int getAdvancedNoticeDays();
 
-    public String getLeaveName(){
-        return leaveName;
-    }
-
-    public int getMaxDaysPerYear(){
-        return maxDaysPerYear;
-    }
-
-    public int getAdvancedNoticeDays(){
-        return advancedNoticeDays;
-    }
-
-    public boolean issPaid(){
-        return isPaid;
-    }
+    boolean isPaid();
 }
