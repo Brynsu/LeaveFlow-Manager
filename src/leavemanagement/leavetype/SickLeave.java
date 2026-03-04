@@ -1,11 +1,31 @@
 package leavemanagement.leavetype;
 
+// SICK LEAVE
+public class SickLeave implements LeaveType {
 
-//SICK LEAVE
-public class SickLeave extends LeaveType{
+    private String leaveCode = "SL";
+    private String leaveName = "Sick Leave";
+    private int maxDaysPerYear = 10;
+    private int advancedNoticeDays = 0;
+    private boolean isPaid = true;
 
-    public SickLeave(){
+    public String getLeaveCode() {
+        return leaveCode;
+    }
 
-        super("SL", "Sick Leave", 10, 0, true);
+    public String getLeaveName() {
+        return leaveName;
+    }
+
+    public int getMaxDaysPerYear() {
+        return maxDaysPerYear;
+    }
+
+    public int getAdvancedNoticeDays() {
+        return advancedNoticeDays;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
     }
 }
