@@ -3,24 +3,27 @@ package leavemanagement.employee;
 public class Employee {
 
 
-    // Private Fields [ ENCAPSULATION ]
+    // Protected Fields [ ENCAPSULATION para di ma tandog ]
 
-    private int id, vacationBal, sickBal, emergencyBal;
-    private String name, department, email, password;
+        protected int id;
+        protected String name;
+        protected String department;
+        protected String email;
+        protected int vacationBal;
+        protected int sickBal;
+        protected int emergencyBal;
 
-    // CONSTRUCTOR
+        public Employee(int id, String name, String department, String email) {
+            this.id = id;
+            this.name = name;
+            this.department = department;
+            this.email = email;
+            this.vacationBal = 15;
+            this.sickBal = 10;
+            this.emergencyBal = 5;
+        }
 
-    public Employee(int id, String name, String department, String email) {
-        this.id = id;
-        this.name = name;
-        this.department = department;
-        this.email = email;
-        this.vacationBal = 15;
-        this.sickBal = 10;
-        this.emergencyBal = 5;
-    }
-
-    // GETTERS
+    // GETTERS diria
 
     public int getId() {
         return id;
@@ -50,7 +53,7 @@ public class Employee {
         return emergencyBal;
     }
 
-    // SETTERS
+    // SETTERS diria
 
     public void setName(String name) {
         this.name = name;
