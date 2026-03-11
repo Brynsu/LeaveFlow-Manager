@@ -318,6 +318,26 @@ public class LeaveManagementSystem {
         System.out.print("Enter End Date (YYYY-MM-DD): ");
         String endDate = sc.nextLine();
 
+        //fix para sa test case 15
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+
+        if (start.isAfter(end)) {
+            System.out.println("Error: Start date must be earlier than or equal to end date.");
+            return;
+        }
+
+        String dateFiled = LocalDate.now().toString();
+        LocalDate filed = LocalDate.parse(dateFiled);
+
+        //fix parsa sa Test case 17
+        if (filed.plusDays(type.getAdvancedNoticeDays()).isAfter(start)) {
+            System.out.println("Error: Leave must be filed at least "
+                    + type.getAdvancedNoticeDays()
+                    + " days before the start date.");
+            return;
+        }
+
         System.out.print("Enter Number of Days: ");
         int days = sc.nextInt();
         sc.nextLine();
@@ -351,7 +371,6 @@ public class LeaveManagementSystem {
         System.out.print("Enter Reason: ");
         String reason = sc.nextLine();
 
-        String dateFiled = LocalDate.now().toString();
 
         LeaveRequest req = new LeaveRequest(
                 requestId,
@@ -366,7 +385,7 @@ public class LeaveManagementSystem {
 
         leaveService.addRequest(req);
 
-        System.out.println("\n✔ Leave request submitted successfully!");
+        System.out.println("\nLeave request submitted successfully!");
     }
 
     private void viewMyLeaveStatus() {
