@@ -1,7 +1,9 @@
 package leavemanagement;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import leavemanagement.employee.Employee;
 import leavemanagement.request.LeaveRequest;
 import leavemanagement.service.LeaveService;
@@ -13,6 +15,7 @@ import leavemanagement.leavetype.VacationLeave;
 import leavemanagement.leavetype.SickLeave;
 import leavemanagement.leavetype.EmergencyLeave;
 
+//nag add Try Catch
 public class LeaveManagementSystem {
 
     private Scanner sc;
@@ -25,7 +28,6 @@ public class LeaveManagementSystem {
     private Employee currentUser;
 
     public LeaveManagementSystem() {
-
         sc = new Scanner(System.in);
         systemRunning = true;
 
@@ -39,7 +41,6 @@ public class LeaveManagementSystem {
     public void startSystem() {
 
         while (systemRunning) {
-
             System.out.println("\n==================================================");
             System.out.println("                LEAVE FLOW MANAGER");
             System.out.println("==================================================\n");
@@ -47,9 +48,18 @@ public class LeaveManagementSystem {
             System.out.println("                      LOGIN");
             System.out.println("--------------------------------------------------");
 
-            System.out.print("Enter Employee ID: ");
-            int id = sc.nextInt();
-            sc.nextLine();
+            int id;
+
+            try {
+                System.out.print("Enter Employee ID: ");
+                id = sc.nextInt();
+                sc.nextLine();
+
+            } catch (InputMismatchException e) {
+                System.out.println("\nError: Employee ID must be a number.");
+                sc.nextLine();
+                continue;
+            }
 
             System.out.print("Enter Employee Name: ");
             String name = sc.nextLine();
@@ -64,34 +74,27 @@ public class LeaveManagementSystem {
             char firstDigit = idStr.charAt(0);
 
             if (firstDigit == '1' && !department.equalsIgnoreCase("HR")) {
-
                 currentUser = company.getOrCreateEmployee(id, name, department, email, "EMPLOYEE");
-
                 currentUser.resetBalancesIfNewYear();
 
                 System.out.println("\nLogin Successful as Employee!");
                 employeeMenu();
 
             } else if (firstDigit == '2' && !department.equalsIgnoreCase("HR")) {
-
                 currentUser = company.getOrCreateEmployee(id, name, department, email, "SUPERVISOR");
-
                 currentUser.resetBalancesIfNewYear();
 
                 System.out.println("\nLogin Successful as Supervisor!");
                 supervisorMenu();
 
             } else if (firstDigit == '3' && department.equalsIgnoreCase("HR")) {
-
                 currentUser = company.getOrCreateEmployee(id, name, department, email, "HR");
-
                 currentUser.resetBalancesIfNewYear();
 
                 System.out.println("\nLogin Successful as HR Admin!");
                 hrAdminMenu();
 
             } else {
-
                 currentUser = null;
                 System.out.println("\nInvalid credentials based on company rules.");
             }
@@ -101,7 +104,6 @@ public class LeaveManagementSystem {
             String choice = sc.nextLine();
 
             if (choice.equalsIgnoreCase("no")) {
-
                 systemRunning = false;
                 System.out.println("\nExiting system...");
             }
@@ -110,11 +112,9 @@ public class LeaveManagementSystem {
 
     // EMPLOYEE MENU
     public void employeeMenu() {
-
         boolean isLoggedIn = true;
 
         while (isLoggedIn) {
-
             System.out.println("\n==================================================");
             System.out.println("                   EMPLOYEE MENU");
             System.out.println("==================================================");
@@ -124,12 +124,20 @@ public class LeaveManagementSystem {
             System.out.println("[3] View Leave Balance");
             System.out.println("[4] Logout");
 
-            System.out.print("\nChoose Option: ");
-            int option = sc.nextInt();
-            sc.nextLine();
+            int option;
+
+            try {
+                System.out.print("\nChoose Option: ");
+                option = sc.nextInt();
+                sc.nextLine();
+
+            } catch (InputMismatchException e) {
+                System.out.println("\nError: Please enter a valid number.");
+                sc.nextLine();
+                continue;
+            }
 
             switch (option) {
-
                 case 1:
                     openLeaveForm();
                     break;
@@ -156,12 +164,10 @@ public class LeaveManagementSystem {
 
     // SUPERVISOR MENU
     public void supervisorMenu() {
-
         boolean isLoggedIn = true;
         boolean hasViewedPending = false;
 
         while (isLoggedIn) {
-
             System.out.println("\n==================================================");
             System.out.println("                 SUPERVISOR MENU");
             System.out.println("==================================================");
@@ -174,12 +180,20 @@ public class LeaveManagementSystem {
             System.out.println("[6] Reject Leave Request");
             System.out.println("[7] Logout");
 
-            System.out.print("\nChoose option: ");
-            int option = sc.nextInt();
-            sc.nextLine();
+            int option;
+
+            try {
+                System.out.print("\nChoose option: ");
+                option = sc.nextInt();
+                sc.nextLine();
+
+            } catch (InputMismatchException e) {
+                System.out.println("\nError: Please enter a valid number.");
+                sc.nextLine();
+                continue;
+            }
 
             switch (option) {
-
                 case 1:
                     openLeaveForm();
                     break;
@@ -227,11 +241,9 @@ public class LeaveManagementSystem {
 
     // HR ADMIN MENU
     public void hrAdminMenu() {
-
         boolean isLoggedIn = true;
 
         while (isLoggedIn) {
-
             System.out.println("\n==================================================");
             System.out.println("                   HR ADMIN MENU");
             System.out.println("==================================================");
@@ -243,12 +255,20 @@ public class LeaveManagementSystem {
             System.out.println("[5] Generate Leave Report");
             System.out.println("[6] Logout");
 
-            System.out.print("\nChoose option: ");
-            int option = sc.nextInt();
-            sc.nextLine();
+            int option;
+
+            try {
+                System.out.print("\nChoose option: ");
+                option = sc.nextInt();
+                sc.nextLine();
+
+            } catch (InputMismatchException e) {
+                System.out.println("\nError: Please enter a valid number.");
+                sc.nextLine();
+                continue;
+            }
 
             switch (option) {
-
                 case 1:
                     openLeaveForm();
                     break;
@@ -284,6 +304,7 @@ public class LeaveManagementSystem {
     private void openLeaveForm() {
 
         if (currentUser == null) {
+
             System.out.println("No user logged in.");
             return;
         }
@@ -292,9 +313,19 @@ public class LeaveManagementSystem {
         System.out.println("                LEAVE REQUEST FORM");
         System.out.println("==================================================");
 
-        System.out.print("Enter Request ID: ");
-        int requestId = sc.nextInt();
-        sc.nextLine();
+        int requestId;
+
+        try {
+            System.out.print("Enter Request ID: ");
+            requestId = sc.nextInt();
+            sc.nextLine();
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Error: Request ID must be a number.");
+            sc.nextLine();
+            return;
+        }
 
         System.out.print("Enter Leave Type (VL/SL/EL): ");
         String leaveInput = sc.nextLine();
@@ -303,94 +334,116 @@ public class LeaveManagementSystem {
 
         if (leaveInput.equalsIgnoreCase("VL")) {
             type = new VacationLeave();
+
         } else if (leaveInput.equalsIgnoreCase("SL")) {
             type = new SickLeave();
+
         } else if (leaveInput.equalsIgnoreCase("EL")) {
             type = new EmergencyLeave();
+
         } else {
             System.out.println("Error: Invalid leave type.");
             return;
         }
 
-        System.out.print("Enter Start Date (YYYY-MM-DD): ");
-        String startDate = sc.nextLine();
+        LocalDate start;
+        LocalDate end;
 
-        System.out.print("Enter End Date (YYYY-MM-DD): ");
-        String endDate = sc.nextLine();
+        try {
+            System.out.print("Enter Start Date (YYYY-MM-DD): ");
+            String startDate = sc.nextLine();
 
-        //fix para sa test case 15
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+            System.out.print("Enter End Date (YYYY-MM-DD): ");
+            String endDate = sc.nextLine();
 
-        if (start.isAfter(end)) {
-            System.out.println("Error: Start date must be earlier than or equal to end date.");
-            return;
+            start = LocalDate.parse(startDate);
+            end = LocalDate.parse(endDate);
+
+            if (start.isAfter(end)) {
+
+                System.out.println("Error: Start date must be earlier than or equal to end date.");
+                return;
+            }
+
+            LocalDate filed = LocalDate.now();
+
+            if (filed.plusDays(type.getAdvancedNoticeDays()).isAfter(start)) {
+                System.out.println("Error: Leave must be filed at least "
+                        + type.getAdvancedNoticeDays()
+                        + " days before the start date.");
+                return;
+            }
+
+            int days;
+
+            try {
+
+                System.out.print("Enter Number of Days: ");
+                days = sc.nextInt();
+                sc.nextLine();
+
+                if (days <= 0) {
+
+                    System.out.println("Error: Leave days must be greater than zero.");
+                    return;
+
+                }
+
+                int availableBalance = 0;
+
+                if (type.getLeaveCode().equalsIgnoreCase("VL")) {
+                    availableBalance = currentUser.getVacationBal();
+
+                } else if (type.getLeaveCode().equalsIgnoreCase("SL")) {
+                    availableBalance = currentUser.getSickBal();
+
+                } else if (type.getLeaveCode().equalsIgnoreCase("EL")) {
+                    availableBalance = currentUser.getEmergencyBal();
+                }
+
+                if (days > availableBalance) {
+                    System.out.println("Error: Requested days exceed your available "
+                            + type.getLeaveName() + " balance.");
+                    return;
+                }
+
+                System.out.print("Enter Reason: ");
+                String reason = sc.nextLine();
+
+                String dateFiled = LocalDate.now().toString();
+
+                LeaveRequest req = new LeaveRequest(
+                        requestId,
+                        currentUser.getId(),
+                        type,
+                        dateFiled,
+                        start.toString(),
+                        end.toString(),
+                        days,
+                        reason
+                );
+
+                leaveService.addRequest(req);
+
+                System.out.println("\nLeave request submitted successfully!");
+
+            } catch (InputMismatchException e) {
+
+                System.out.println("Error: Number of days must be a valid number.");
+                sc.nextLine();
+            }
+
+        } catch (DateTimeParseException e) {
+
+            System.out.println("Error: Invalid date format. Please use YYYY-MM-DD.");
         }
-
-        String dateFiled = LocalDate.now().toString();
-        LocalDate filed = LocalDate.parse(dateFiled);
-
-        //fix parsa sa Test case 17
-        if (filed.plusDays(type.getAdvancedNoticeDays()).isAfter(start)) {
-            System.out.println("Error: Leave must be filed at least "
-                    + type.getAdvancedNoticeDays()
-                    + " days before the start date.");
-            return;
-        }
-
-        System.out.print("Enter Number of Days: ");
-        int days = sc.nextInt();
-        sc.nextLine();
-
-        if (days <= 0) {
-            System.out.println("Error: Leave days must be greater than zero.");
-            return;
-        }
-
-//Added Validation:
-// Prevent employees from filing a leave request
-// if the requested days exceed their available leave balance.
-        int availableBalance = 0;
-
-        if (type.getLeaveCode().equalsIgnoreCase("VL")) {
-            availableBalance = currentUser.getVacationBal();
-        }
-        else if (type.getLeaveCode().equalsIgnoreCase("SL")) {
-            availableBalance = currentUser.getSickBal();
-        }
-        else if (type.getLeaveCode().equalsIgnoreCase("EL")) {
-            availableBalance = currentUser.getEmergencyBal();
-        }
-
-        if (days > availableBalance) {
-            System.out.println("Error: Requested days exceed your available "
-                    + type.getLeaveName() + " balance.");
-            return;
-        }
-
-        System.out.print("Enter Reason: ");
-        String reason = sc.nextLine();
-
-
-        LeaveRequest req = new LeaveRequest(
-                requestId,
-                currentUser.getId(),
-                type,
-                dateFiled,
-                startDate,
-                endDate,
-                days,
-                reason
-        );
-
-        leaveService.addRequest(req);
-
-        System.out.println("\nLeave request submitted successfully!");
     }
 
     private void viewMyLeaveStatus() {
 
-        if (currentUser == null) return;
+        if (currentUser == null) {
+            return;
+        }
 
         System.out.println("\n==================================================");
         System.out.println("                MY LEAVE REQUESTS");
@@ -409,13 +462,16 @@ public class LeaveManagementSystem {
         }
 
         if (!found) {
+
             System.out.println("No leave requests found.");
         }
     }
 
     private void viewMyBalance() {
 
-        if (currentUser == null) return;
+        if (currentUser == null) {
+            return;
+        }
 
         System.out.println("\n==================================================");
         System.out.println("                 MY LEAVE BALANCE");
@@ -435,7 +491,6 @@ public class LeaveManagementSystem {
         for (LeaveRequest r : leaveService.getAllRequests()) {
 
             if (r.getStatus().equalsIgnoreCase("Pending")) {
-
                 Employee emp = company.findEmployeeById(r.getEmployeeId());
                 r.displayRequest(emp);
                 found = true;
@@ -443,6 +498,7 @@ public class LeaveManagementSystem {
         }
 
         if (!found) {
+
             System.out.println("No pending requests.");
         }
     }
@@ -453,30 +509,52 @@ public class LeaveManagementSystem {
         System.out.println("                 APPROVE REQUEST");
         System.out.println("==================================================");
 
-        System.out.print("Enter Request ID to approve: ");
-        int requestId = sc.nextInt();
-        sc.nextLine();
+        int requestId;
+
+        try {
+            System.out.print("Enter Request ID to approve: ");
+            requestId = sc.nextInt();
+            sc.nextLine();
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Error: Request ID must be a number.");
+            sc.nextLine();
+            return;
+        }
 
         boolean ok = approvalService.approve(requestId);
 
-        if (!ok)
+        if (!ok) {
             System.out.println("Request not found.");
+        }
     }
 
     private void rejectRequestFlow() {
-
         System.out.println("\n==================================================");
         System.out.println("                  REJECT REQUEST");
         System.out.println("==================================================");
 
-        System.out.print("Enter Request ID to reject: ");
-        int requestId = sc.nextInt();
-        sc.nextLine();
+        int requestId;
+
+        try {
+
+            System.out.print("Enter Request ID to reject: ");
+            requestId = sc.nextInt();
+            sc.nextLine();
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Error: Request ID must be a number.");
+            sc.nextLine();
+            return;
+        }
 
         boolean ok = approvalService.reject(requestId);
 
-        if (!ok)
+        if (!ok) {
             System.out.println("Request not found.");
+        }
     }
 
     private void viewAllRecords() {
@@ -486,6 +564,7 @@ public class LeaveManagementSystem {
         System.out.println("==================================================");
 
         if (leaveService.getAllRequests().isEmpty()) {
+
             System.out.println("No records yet.");
             return;
         }
@@ -508,12 +587,21 @@ public class LeaveManagementSystem {
         System.out.println("[3] Approved Requests");
         System.out.println("[4] Rejected Requests");
 
-        System.out.print("\nChoose option: ");
-        int choice = sc.nextInt();
-        sc.nextLine();
+        int choice;
+
+        try {
+            System.out.print("\nChoose option: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+
+        } catch (InputMismatchException e) {
+
+            System.out.println("Error: Please enter a valid number.");
+            sc.nextLine();
+            return;
+        }
 
         switch (choice) {
-
             case 1:
                 reportService.generateAllRequestsReport(leaveService.getAllRequests());
                 break;
