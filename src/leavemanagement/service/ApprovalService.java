@@ -21,14 +21,18 @@ public class ApprovalService {
         LeaveRequest req = leaveService.getRequestById(requestId);
         if (req == null) return false;
 
-        req.setStatus("Approved");
-
         Employee emp = company.findEmployeeById(req.getEmployeeId());
         if (emp == null) return false;
 
-        balanceService.deductBalance(emp, req.getLeaveType(), req.getDays());
-        System.out.println("Request approved and balance updated.");
+        boolean deducted = balanceService.deductBalance(emp, req.getLeaveType().getLeaveCode(), req.getDays());
 
+        if (!deducted) {
+            System.out.println("Approval failed. Balance was not deducted.");
+            return false;
+        }
+
+        req.setStatus("Approved");
+        System.out.println("Request approved and balance updated.");
         return true;
     }
 
@@ -39,7 +43,6 @@ public class ApprovalService {
 
         req.setStatus("Rejected");
         System.out.println("Request rejected.");
-
         return true;
     }
 }
