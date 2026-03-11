@@ -5,16 +5,16 @@ import java.time.LocalDate;
 public class Employee {
 
 
-    // Protected Fields
+    //changed from protected to private
 
-        protected int id;
-        protected String name;
-        protected String department;
-        protected String email;
-        protected int vacationBal;
-        protected int sickBal;
-        protected int emergencyBal;
-        private int balanceYear;
+    private int id;
+    private String name;
+    private String department;
+    private String email;
+    private int vacationBal;
+    private int sickBal;
+    private int emergencyBal;
+    private int balanceYear;
 
 
         public Employee(int id, String name, String department, String email) {
