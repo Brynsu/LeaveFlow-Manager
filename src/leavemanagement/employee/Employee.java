@@ -1,5 +1,7 @@
 package leavemanagement.employee;
 
+import java.time.LocalDate;
+
 public class Employee {
 
 
@@ -12,6 +14,8 @@ public class Employee {
         protected int vacationBal;
         protected int sickBal;
         protected int emergencyBal;
+        private int balanceYear; //- added: Tracks the calendar year when leave balances were last reset.
+
 
         public Employee(int id, String name, String department, String email) {
             this.id = id;
@@ -21,6 +25,7 @@ public class Employee {
             this.vacationBal = 15;
             this.sickBal = 10;
             this.emergencyBal = 5;
+            this.balanceYear = LocalDate.now().getYear(); // added: Stores the current year so the system knows when to reset balances next year.
         }
 
     // GETTERS diria
@@ -67,15 +72,29 @@ public class Employee {
         this.email = email;
     }
 
-    public void setVacationBal(int v){
+    //Added validation: Leave balances must not be negative
+
+    public void setVacationBal(int v) {
+        if (v < 0) {
+            System.out.println("Vacation Leave balance cannot be negative.");
+            return;
+        }
         vacationBal = v;
     }
 
-    public void setSickBal(int s){
+    public void setSickBal(int s) {
+        if (s < 0) {
+            System.out.println("Sick Leave balance cannot be negative.");
+            return;
+        }
         sickBal = s;
     }
 
-    public void setEmergencyBal(int e){
+    public void setEmergencyBal(int e) {
+        if (e < 0) {
+            System.out.println("Emergency Leave balance cannot be negative.");
+            return;
+        }
         emergencyBal = e;
     }
 
@@ -90,5 +109,20 @@ public class Employee {
         System.out.println("Sick Balance: " + sickBal);
         System.out.println("Emergency Balance: " + emergencyBal);
         System.out.println("TOTAL Leave Balance (Year): " + getTotalLeaveBalance());
+    }
+
+    // added:Resets leave balances at the start of a new calendar year.
+
+    public void resetBalancesIfNewYear() {
+        int currentYear = LocalDate.now().getYear();
+
+        if (currentYear > balanceYear) {
+            vacationBal = 15;
+            sickBal = 10;
+            emergencyBal = 5;
+            balanceYear = currentYear;
+
+            System.out.println("Leave balances have been reset for the new year.");
+        }
     }
 }
