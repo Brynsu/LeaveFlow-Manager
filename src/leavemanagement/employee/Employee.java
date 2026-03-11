@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Employee {
 
 
-    // Protected Fields [ ENCAPSULATION para di ma tandog ]
+    // Protected Fields
 
         protected int id;
         protected String name;
@@ -14,7 +14,7 @@ public class Employee {
         protected int vacationBal;
         protected int sickBal;
         protected int emergencyBal;
-        private int balanceYear; //- added: Tracks the calendar year when leave balances were last reset.
+        private int balanceYear;
 
 
         public Employee(int id, String name, String department, String email) {
@@ -25,7 +25,7 @@ public class Employee {
             this.vacationBal = 15;
             this.sickBal = 10;
             this.emergencyBal = 5;
-            this.balanceYear = LocalDate.now().getYear(); // added: Stores the current year so the system knows when to reset balances next year.
+            this.balanceYear = LocalDate.now().getYear();
         }
 
     // GETTERS diria
