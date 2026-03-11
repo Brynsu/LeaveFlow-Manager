@@ -70,7 +70,7 @@ public class LeaveRequest {
             System.out.println("Email      : (Not found)");
         }
 
-        System.out.println("Leave Type : " + leaveType);
+        System.out.println("Leave Type : " + leaveType.getLeaveName() + " (" + leaveType.getLeaveCode() + ")"); //fixed
         System.out.println("Date Filed : " + dateFiled); //included in display  -plent
         System.out.println("Start Date : " + startDate);
         System.out.println("End Date   : " + endDate);
