@@ -2,26 +2,25 @@ package leavemanagement.service;
 
 import leavemanagement.employee.Employee;
 
-//Added validation
 public class BalanceService {
 
-    public void deductBalance(Employee emp, String leaveType, int days) {
+    public boolean deductBalance(Employee emp, String leaveType, int days) {
 
         if (emp == null) {
             System.out.println("Employee not found.");
-            return;
+            return false;
         }
 
         if (days <= 0) {
             System.out.println("Invalid number of leave days.");
-            return;
+            return false;
         }
 
         if (leaveType.equalsIgnoreCase("VL")) {
 
             if (emp.getVacationBal() < days) {
                 System.out.println("Not enough Vacation Leave balance.");
-                return;
+                return false;
             }
 
             emp.setVacationBal(emp.getVacationBal() - days);
@@ -30,7 +29,7 @@ public class BalanceService {
 
             if (emp.getSickBal() < days) {
                 System.out.println("Not enough Sick Leave balance.");
-                return;
+                return false;
             }
 
             emp.setSickBal(emp.getSickBal() - days);
@@ -39,17 +38,17 @@ public class BalanceService {
 
             if (emp.getEmergencyBal() < days) {
                 System.out.println("Not enough Emergency Leave balance.");
-                return;
+                return false;
             }
 
             emp.setEmergencyBal(emp.getEmergencyBal() - days);
 
         } else {
-
             System.out.println("Invalid leave type.");
-            return;
+            return false;
         }
 
         System.out.println("Balance deducted successfully.");
+        return true;
     }
 }
